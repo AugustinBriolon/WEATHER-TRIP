@@ -1,40 +1,167 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Planificateur Météo Randonnée
 
-## Getting Started
+Une application Next.js 15 pour planifier vos randonnées avec les prévisions météo en temps réel.
 
-First, run the development server:
+## 🛠 Technologies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 15** (Pages Router)
+- **TypeScript**
+- **TailwindCSS v4**
+- **shadcn/ui** pour les composants
+- **OpenWeatherMap API** pour les données météo
+- **date-fns** pour la gestion des dates
+- **lucide-react** pour les icônes
+
+## ✨ Fonctionnalités
+
+- 📅 **Sélection de date** avec un DatePicker moderne
+- 🌍 **Recherche de localisation** avec autocomplétion
+- 🌤 **Prévisions météo** détaillées (température, précipitations, vent, etc.)
+- 📱 **Interface responsive** et moderne
+- 🎨 **Design élégant** avec shadcn/ui
+- 🔄 **Actualisation** des données météo
+- 📋 **Gestion** des jours de randonnée
+
+## 🚀 Installation
+
+1. **Clonez le repository**
+
+   ```bash
+   git clone <votre-repo>
+   cd weather-map
+   ```
+
+2. **Installez les dépendances**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configurez les variables d'environnement**
+
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+   Puis ajoutez votre clé API OpenWeatherMap dans `.env.local` :
+
+   ```
+   NEXT_PUBLIC_OPENWEATHER_API_KEY=votre_cle_api_ici
+   ```
+
+4. **Obtenez une clé API gratuite**
+
+   - Allez sur [OpenWeatherMap](https://openweathermap.org/api)
+   - Créez un compte gratuit
+   - Obtenez votre clé API
+   - Collez-la dans le fichier `.env.local`
+
+5. **Lancez l'application**
+
+   ```bash
+   npm run dev
+   ```
+
+6. **Ouvrez votre navigateur**
+   ```
+   http://localhost:3000
+   ```
+
+## 📁 Structure du projet
+
+```
+weather-map/
+├── components/
+│   ├── ui/                 # Composants shadcn/ui
+│   ├── TripForm.tsx        # Formulaire d'ajout de randonnée
+│   ├── WeatherCard.tsx     # Carte d'affichage météo
+│   └── TripPlanner.tsx     # Composant principal
+├── lib/
+│   ├── utils.ts           # Utilitaires shadcn
+│   └── weather-api.ts     # API météo
+├── types/
+│   └── weather.ts         # Types TypeScript
+├── pages/
+│   └── index.tsx          # Page principale
+└── styles/
+    └── globals.css        # Styles globaux
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Utilisation
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. **Ajoutez un jour de randonnée**
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+   - Sélectionnez une date future
+   - Recherchez et sélectionnez une localisation
+   - Cliquez sur "Ajouter à mon voyage"
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+2. **Consultez les prévisions**
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   - Les données météo se chargent automatiquement
+   - Température min/max, conditions, précipitations, vent
+   - Icônes météo en temps réel
 
-## Learn More
+3. **Gérez votre voyage**
+   - Supprimez des jours avec le bouton 🗑️
+   - Actualisez les données avec le bouton 🔄
+   - Vue chronologique automatique
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### Variables d'environnement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `NEXT_PUBLIC_OPENWEATHER_API_KEY` : Votre clé API OpenWeatherMap
 
-## Deploy on Vercel
+### API Météo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+L'application utilise l'API gratuite d'OpenWeatherMap qui offre :
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- Prévisions 5 jours
+- Données toutes les 3 heures
+- Température en Celsius
+- Vitesse du vent en km/h
+
+## 🎨 Personnalisation
+
+### Couleurs
+
+Les couleurs de température sont automatiques :
+
+- 🔵 < 0°C : Bleu
+- 🔷 0-10°C : Cyan
+- 🟢 10-20°C : Vert
+- 🟠 20-30°C : Orange
+- 🔴 > 30°C : Rouge
+
+### Thème
+
+L'application utilise le thème neutre de shadcn/ui, personnalisable dans `components.json`.
+
+## 🚀 Déploiement
+
+### Vercel (Recommandé)
+
+1. Connectez votre repo GitHub à Vercel
+2. Ajoutez la variable d'environnement `NEXT_PUBLIC_OPENWEATHER_API_KEY`
+3. Déployez !
+
+### Autres plateformes
+
+L'application est compatible avec tous les hébergeurs supportant Next.js.
+
+## 📝 Licence
+
+MIT License - Libre d'utilisation et de modification.
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à :
+
+- Signaler des bugs
+- Proposer des améliorations
+- Ajouter de nouvelles fonctionnalités
+
+---
+
+**Bonnes randonnées ! 🏔️**
+# WEATHER-TRIP
