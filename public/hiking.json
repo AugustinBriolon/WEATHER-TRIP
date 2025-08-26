@@ -1,0 +1,873 @@
+{
+  "hikingDays": [
+      {
+          "id": "1756677600000-45.0459739-3.8855537",
+          "date": "2025-08-31T22:00:00.000Z",
+          "location": {
+              "name": "Le Puy-en-Velay, FR",
+              "coordinates": {
+                  "lat": 45.0459739,
+                  "lon": 3.8855537
+              }
+          },
+          "weather": {
+              "date": "2025-08-31",
+              "temperature": {
+                  "current": 25.5,
+                  "min": 13.97,
+                  "max": 28.55
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0.03,
+              "humidity": 44.91,
+              "pressure": 1015.3,
+              "wind": {
+                  "speed": 3.87,
+                  "direction": 175.32
+              }
+          }
+      },
+      {
+          "id": "1756764000000-45.0008893-3.67047548870606",
+          "date": "2025-09-01T22:00:00.000Z",
+          "location": {
+              "name": "Saint-Privat-d'Allier, FR",
+              "coordinates": {
+                  "lat": 45.0008893,
+                  "lon": 3.67047548870606
+              }
+          },
+          "weather": {
+              "date": "2025-09-01",
+              "temperature": {
+                  "current": 13.58,
+                  "min": 12.12,
+                  "max": 14.1
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 54.81,
+              "humidity": 95.83,
+              "pressure": 1016.83,
+              "wind": {
+                  "speed": 1.81,
+                  "direction": 316.8
+              }
+          }
+      },
+      {
+          "id": "1756850400000-44.959244-3.5446108",
+          "date": "2025-09-02T22:00:00.000Z",
+          "location": {
+              "name": "Saugues, FR",
+              "coordinates": {
+                  "lat": 44.959244,
+                  "lon": 3.5446108
+              }
+          },
+          "weather": {
+              "date": "2025-09-02",
+              "temperature": {
+                  "current": 11.43,
+                  "min": 10.32,
+                  "max": 16.07
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 27.69,
+              "humidity": 93.13,
+              "pressure": 1016.77,
+              "wind": {
+                  "speed": 1.7,
+                  "direction": 333.74
+              }
+          }
+      },
+      {
+          "id": "1756936800000-45.7514047-5.9358845",
+          "date": "2025-09-03T22:00:00.000Z",
+          "location": {
+              "name": "Le Sauvage, FR",
+              "coordinates": {
+                  "lat": 45.7514047,
+                  "lon": 5.9358845
+              }
+          },
+          "weather": {
+              "date": "2025-09-03",
+              "temperature": {
+                  "current": 20.15,
+                  "min": 12.32,
+                  "max": 21.24
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 9.38,
+              "humidity": 66.53,
+              "pressure": 1015.48,
+              "wind": {
+                  "speed": 2.15,
+                  "direction": 336.62
+              }
+          }
+      },
+      {
+          "id": "1757023200000-44.7226438-3.2842235",
+          "date": "2025-09-04T22:00:00.000Z",
+          "location": {
+              "name": "Aumont-Aubrac, FR",
+              "coordinates": {
+                  "lat": 44.7226438,
+                  "lon": 3.2842235
+              }
+          },
+          "weather": {
+              "date": "2025-09-04",
+              "temperature": {
+                  "current": 17.12,
+                  "min": 7.84,
+                  "max": 19.69
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 0,
+              "humidity": 45.25,
+              "pressure": 1019.74,
+              "wind": {
+                  "speed": 3.1,
+                  "direction": 294.56
+              }
+          }
+      },
+      {
+          "id": "1757109600000-44.6625448-3.0465813",
+          "date": "2025-09-05T22:00:00.000Z",
+          "location": {
+              "name": "Nasbinals, FR",
+              "coordinates": {
+                  "lat": 44.6625448,
+                  "lon": 3.0465813
+              }
+          },
+          "weather": {
+              "date": "2025-09-05",
+              "temperature": {
+                  "current": 21.2,
+                  "min": 8.86,
+                  "max": 24.32
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0.1,
+              "humidity": 39.31,
+              "pressure": 1017.81,
+              "wind": {
+                  "speed": 4.33,
+                  "direction": 253.85
+              }
+          }
+      },
+      {
+          "id": "1757196000000-44.5148793-2.8149641",
+          "date": "2025-09-06T22:00:00.000Z",
+          "location": {
+              "name": "Saint-Côme-d'Olt, FR",
+              "coordinates": {
+                  "lat": 44.5148793,
+                  "lon": 2.8149641
+              }
+          },
+          "weather": {
+              "date": "2025-09-06",
+              "temperature": {
+                  "current": 21.66,
+                  "min": 13.91,
+                  "max": 25.32
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 0,
+              "humidity": 47.1,
+              "pressure": 1020.35,
+              "wind": {
+                  "speed": 2.99,
+                  "direction": 274.97
+              }
+          }
+      },
+      {
+          "id": "1757282400000-42.9405649--0.1781125",
+          "date": "2025-09-07T22:00:00.000Z",
+          "location": {
+              "name": "Estaing, FR",
+              "coordinates": {
+                  "lat": 42.9405649,
+                  "lon": -0.1781125
+              }
+          },
+          "weather": {
+              "date": "2025-09-07",
+              "temperature": {
+                  "current": 21.43,
+                  "min": 14.45,
+                  "max": 21.53
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 10.88,
+              "humidity": 58.47,
+              "pressure": 1014.87,
+              "wind": {
+                  "speed": 2.67,
+                  "direction": 354.78
+              }
+          }
+      },
+      {
+          "id": "1757368800000-44.5995543-2.3981666",
+          "date": "2025-09-08T22:00:00.000Z",
+          "location": {
+              "name": "Conques, FR",
+              "coordinates": {
+                  "lat": 44.5995543,
+                  "lon": 2.3981666
+              }
+          },
+          "weather": {
+              "date": "2025-09-08",
+              "temperature": {
+                  "current": 19.29,
+                  "min": 14.41,
+                  "max": 22.41
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 13.91,
+              "humidity": 79.25,
+              "pressure": 1019,
+              "wind": {
+                  "speed": 1.9,
+                  "direction": 292.01
+              }
+          }
+      },
+      {
+          "id": "1757455200000-44.5585148-2.2542071",
+          "date": "2025-09-09T22:00:00.000Z",
+          "location": {
+              "name": "Decazeville, FR",
+              "coordinates": {
+                  "lat": 44.5585148,
+                  "lon": 2.2542071
+              }
+          },
+          "weather": {
+              "date": "2025-09-09",
+              "temperature": {
+                  "current": 22.79,
+                  "min": 11.87,
+                  "max": 27.36
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0,
+              "humidity": 37.01,
+              "pressure": 1018.88,
+              "wind": {
+                  "speed": 1.71,
+                  "direction": 58.08
+              }
+          }
+      },
+      {
+          "id": "1757541600000-44.6092335-2.0324321",
+          "date": "2025-09-10T22:00:00.000Z",
+          "location": {
+              "name": "Figeac, FR",
+              "coordinates": {
+                  "lat": 44.6092335,
+                  "lon": 2.0324321
+              }
+          },
+          "weather": {
+              "date": "2025-09-10",
+              "temperature": {
+                  "current": 19.34,
+                  "min": 10.54,
+                  "max": 23.74
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0,
+              "humidity": 59.03,
+              "pressure": 1020.61,
+              "wind": {
+                  "speed": 1.99,
+                  "direction": 330.22
+              }
+          }
+      },
+      {
+          "id": "1757628000000-44.486397-1.8421185",
+          "date": "2025-09-11T22:00:00.000Z",
+          "location": {
+              "name": "Cajarc, FR",
+              "coordinates": {
+                  "lat": 44.486397,
+                  "lon": 1.8421185
+              }
+          },
+          "weather": {
+              "date": "2025-09-11",
+              "temperature": {
+                  "current": 21.01,
+                  "min": 12.14,
+                  "max": 25.44
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0,
+              "humidity": 57.14,
+              "pressure": 1021.58,
+              "wind": {
+                  "speed": 2.31,
+                  "direction": 80.85
+              }
+          }
+      },
+      {
+          "id": "1757714400000-44.3970338-1.7695063",
+          "date": "2025-09-12T22:00:00.000Z",
+          "location": {
+              "name": "Limogne-en-Quercy, FR",
+              "coordinates": {
+                  "lat": 44.3970338,
+                  "lon": 1.7695063
+              }
+          },
+          "weather": {
+              "date": "2025-09-12",
+              "temperature": {
+                  "current": 21.35,
+                  "min": 13.76,
+                  "max": 25.15
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 0,
+              "humidity": 53.33,
+              "pressure": 1020.27,
+              "wind": {
+                  "speed": 3.75,
+                  "direction": 120.75
+              }
+          }
+      },
+      {
+          "id": "1757800800000-44.8578157-0.9603555",
+          "date": "2025-09-13T22:00:00.000Z",
+          "location": {
+              "name": "Le Pech, FR",
+              "coordinates": {
+                  "lat": 44.8578157,
+                  "lon": 0.9603555
+              }
+          },
+          "weather": {
+              "date": "2025-09-13",
+              "temperature": {
+                  "current": 22.66,
+                  "min": 16.69,
+                  "max": 25.65
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 0.02,
+              "humidity": 58.55,
+              "pressure": 1017.9,
+              "wind": {
+                  "speed": 4.24,
+                  "direction": 107.73
+              }
+          }
+      },
+      {
+          "id": "1757887200000-44.38765-1.3996113",
+          "date": "2025-09-14T22:00:00.000Z",
+          "location": {
+              "name": "Labastide-Marnhac, FR",
+              "coordinates": {
+                  "lat": 44.38765,
+                  "lon": 1.3996113
+              }
+          },
+          "weather": {
+              "date": "2025-09-14",
+              "temperature": {
+                  "current": 20.63,
+                  "min": 16.68,
+                  "max": 22.61
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Nuageux",
+                  "icon": "03d"
+              },
+              "precipitation": 1.15,
+              "humidity": 67.76,
+              "pressure": 1017.97,
+              "wind": {
+                  "speed": 4.26,
+                  "direction": 130.18
+              }
+          }
+      },
+      {
+          "id": "1757973600000-44.2565123-1.1383233",
+          "date": "2025-09-15T22:00:00.000Z",
+          "location": {
+              "name": "Lauzerte, FR",
+              "coordinates": {
+                  "lat": 44.2565123,
+                  "lon": 1.1383233
+              }
+          },
+          "weather": {
+              "date": "2025-09-15",
+              "temperature": {
+                  "current": 17.85,
+                  "min": 17.23,
+                  "max": 18.5
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 10.36,
+              "humidity": 76.5,
+              "pressure": 1018.31,
+              "wind": {
+                  "speed": 6.22,
+                  "direction": 129.14
+              }
+          }
+      },
+      {
+          "id": "1758060000000-44.1050886-1.0846682",
+          "date": "2025-09-16T22:00:00.000Z",
+          "location": {
+              "name": "Moissac, FR",
+              "coordinates": {
+                  "lat": 44.1050886,
+                  "lon": 1.0846682
+              }
+          },
+          "weather": {
+              "date": "2025-09-16",
+              "temperature": {
+                  "current": 17.36,
+                  "min": 15.59,
+                  "max": 18.24
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Très nuageux",
+                  "icon": "04d"
+              },
+              "precipitation": 26.61,
+              "humidity": 77.28,
+              "pressure": 1021.43,
+              "wind": {
+                  "speed": 5.44,
+                  "direction": 131.73
+              }
+          }
+      },
+      {
+          "id": "1758146400000-44.0703766-0.899717",
+          "date": "2025-09-17T22:00:00.000Z",
+          "location": {
+              "name": "Auvillar, FR",
+              "coordinates": {
+                  "lat": 44.0703766,
+                  "lon": 0.899717
+              }
+          },
+          "weather": {
+              "date": "2025-09-17",
+              "temperature": {
+                  "current": 19.41,
+                  "min": 15.5,
+                  "max": 21.37
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Nuageux",
+                  "icon": "03d"
+              },
+              "precipitation": 1.95,
+              "humidity": 68.18,
+              "pressure": 1022.96,
+              "wind": {
+                  "speed": 3.29,
+                  "direction": 132.35
+              }
+          }
+      },
+      {
+          "id": "1758232800000-43.9352778-0.6219444",
+          "date": "2025-09-18T22:00:00.000Z",
+          "location": {
+              "name": "Lectoure, FR",
+              "coordinates": {
+                  "lat": 43.9352778,
+                  "lon": 0.6219444
+              }
+          },
+          "weather": {
+              "date": "2025-09-18",
+              "temperature": {
+                  "current": 21.09,
+                  "min": 14.28,
+                  "max": 24.49
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 0.07,
+              "humidity": 61.68,
+              "pressure": 1024.93,
+              "wind": {
+                  "speed": 2.61,
+                  "direction": 145.55
+              }
+          }
+      },
+      {
+          "id": "1758319200000-43.9564563-0.3745929",
+          "date": "2025-09-19T22:00:00.000Z",
+          "location": {
+              "name": "Condom, FR",
+              "coordinates": {
+                  "lat": 43.9564563,
+                  "lon": 0.3745929
+              }
+          },
+          "weather": {
+              "date": "2025-09-19",
+              "temperature": {
+                  "current": 18.92,
+                  "min": 10.09,
+                  "max": 23.33
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0,
+              "humidity": 64,
+              "pressure": 1022.27,
+              "wind": {
+                  "speed": 2.55,
+                  "direction": 344.64
+              }
+          }
+      },
+      {
+          "id": "1758405600000-43.8613741-0.1007959",
+          "date": "2025-09-20T22:00:00.000Z",
+          "location": {
+              "name": "Eauze, FR",
+              "coordinates": {
+                  "lat": 43.8613741,
+                  "lon": 0.1007959
+              }
+          },
+          "weather": {
+              "date": "2025-09-20",
+              "temperature": {
+                  "current": 17.48,
+                  "min": 8.87,
+                  "max": 21.78
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0,
+              "humidity": 66.71,
+              "pressure": 1017.34,
+              "wind": {
+                  "speed": 2.1,
+                  "direction": 348.22
+              }
+          }
+      },
+      {
+          "id": "1758492000000-43.7591667--0.0327778",
+          "date": "2025-09-21T22:00:00.000Z",
+          "location": {
+              "name": "Nogaro, FR",
+              "coordinates": {
+                  "lat": 43.7591667,
+                  "lon": -0.0327778
+              }
+          },
+          "weather": {
+              "date": "2025-09-21",
+              "temperature": {
+                  "current": 21.41,
+                  "min": 12.39,
+                  "max": 25.84
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0,
+              "humidity": 62.05,
+              "pressure": 1014.96,
+              "wind": {
+                  "speed": 2.01,
+                  "direction": 143.25
+              }
+          }
+      },
+      {
+          "id": "1758578400000-43.7006462--0.2647028",
+          "date": "2025-09-22T22:00:00.000Z",
+          "location": {
+              "name": "Aire-sur-l'Adour, FR",
+              "coordinates": {
+                  "lat": 43.7006462,
+                  "lon": -0.2647028
+              }
+          },
+          "weather": {
+              "date": "2025-09-22",
+              "temperature": {
+                  "current": 22.28,
+                  "min": 14.66,
+                  "max": 26.09
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 5.46,
+              "humidity": 66.04,
+              "pressure": 1015.76,
+              "wind": {
+                  "speed": 1.95,
+                  "direction": 151.65
+              }
+          }
+      },
+      {
+          "id": "1758664800000-43.5362569--0.4116715",
+          "date": "2025-09-23T22:00:00.000Z",
+          "location": {
+              "name": "Arzacq-Arraziguet, FR",
+              "coordinates": {
+                  "lat": 43.5362569,
+                  "lon": -0.4116715
+              }
+          },
+          "weather": {
+              "date": "2025-09-23",
+              "temperature": {
+                  "current": 22.51,
+                  "min": 16.16,
+                  "max": 25.69
+              },
+              "condition": {
+                  "main": "Clear",
+                  "description": "Ciel dégagé",
+                  "icon": "01d"
+              },
+              "precipitation": 0.94,
+              "humidity": 68.48,
+              "pressure": 1016.19,
+              "wind": {
+                  "speed": 2.84,
+                  "direction": 155.45
+              }
+          }
+      },
+      {
+          "id": "1758751200000-43.4645781--0.6150029",
+          "date": "2025-09-24T22:00:00.000Z",
+          "location": {
+              "name": "Arthez-de-Béarn, FR",
+              "coordinates": {
+                  "lat": 43.4645781,
+                  "lon": -0.6150029
+              }
+          },
+          "weather": {
+              "date": "2025-09-24",
+              "temperature": {
+                  "current": 23.11,
+                  "min": 18.69,
+                  "max": 25.32
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 6.84,
+              "humidity": 68.2,
+              "pressure": 1016.15,
+              "wind": {
+                  "speed": 4.07,
+                  "direction": 162.22
+              }
+          }
+      },
+      {
+          "id": "1758837600000-43.3221488--0.761038",
+          "date": "2025-09-25T22:00:00.000Z",
+          "location": {
+              "name": "Navarrenx, FR",
+              "coordinates": {
+                  "lat": 43.3221488,
+                  "lon": -0.761038
+              }
+          },
+          "weather": {
+              "date": "2025-09-25",
+              "temperature": {
+                  "current": 22.29,
+                  "min": 17.38,
+                  "max": 24.74
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 12.48,
+              "humidity": 76.61,
+              "pressure": 1018.11,
+              "wind": {
+                  "speed": 3.32,
+                  "direction": 167.99
+              }
+          }
+      },
+      {
+          "id": "1758924000000-43.312462999999994--0.9139613604179583",
+          "date": "2025-09-26T22:00:00.000Z",
+          "location": {
+              "name": "Aroue-Ithorots-Olhaïby, FR",
+              "coordinates": {
+                  "lat": 43.312462999999994,
+                  "lon": -0.9139613604179583
+              }
+          },
+          "weather": {
+              "date": "2025-09-26",
+              "temperature": {
+                  "current": 23.51,
+                  "min": 18.04,
+                  "max": 26.24
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 1.75,
+              "humidity": 73.4,
+              "pressure": 1015.58,
+              "wind": {
+                  "speed": 3.65,
+                  "direction": 171.19
+              }
+          }
+      },
+      {
+          "id": "1759010400000-43.1629528--1.2380528",
+          "date": "2025-09-27T22:00:00.000Z",
+          "location": {
+              "name": "Saint-Jean-Pied-de-Port, FR",
+              "coordinates": {
+                  "lat": 43.1629528,
+                  "lon": -1.2380528
+              }
+          },
+          "weather": {
+              "date": "2025-09-27",
+              "temperature": {
+                  "current": 24.56,
+                  "min": 19.82,
+                  "max": 26.93
+              },
+              "condition": {
+                  "main": "Clouds",
+                  "description": "Peu nuageux",
+                  "icon": "02d"
+              },
+              "precipitation": 0,
+              "humidity": 68.5,
+              "pressure": 1011.62,
+              "wind": {
+                  "speed": 5.63,
+                  "direction": 165.84
+              }
+          }
+      }
+  ],
+  "lastUpdated": 1756201500893
+}
