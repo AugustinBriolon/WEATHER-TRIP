@@ -30,39 +30,32 @@ export function CalendarView({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  // Fonction pour obtenir les jours avec des événements
   const getDaysWithEvents = () => {
     return hikingDays.map((day) => day.date);
   };
 
-  // Fonction pour obtenir l'événement d'une date spécifique
   const getEventForDate = (date: Date) => {
     const dateStr = format(date, 'yyyy-MM-dd');
     return hikingDays.find((day) => format(day.date, 'yyyy-MM-dd') === dateStr);
   };
 
-  // Fonction pour gérer le clic sur une date
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
     const event = getEventForDate(date);
 
     if (event) {
-      // Ouvrir la modale de consultation
       setIsModalOpen(true);
     } else {
-      // Ouvrir la modale d'ajout
       setIsAddModalOpen(true);
     }
   };
 
-  // Fonction pour ajouter un événement depuis la modale
   const handleAddFromModal = (date: Date, location: LocationSearchResult) => {
     onAddHikingDay(date, location);
     setIsAddModalOpen(false);
     setSelectedDate(undefined);
   };
 
-  // Fonction pour supprimer un événement depuis la modale
   const handleRemoveFromModal = () => {
     if (selectedDate) {
       const event = getEventForDate(selectedDate);
@@ -76,7 +69,6 @@ export function CalendarView({
 
   return (
     <div className='space-y-4 sm:space-y-6'>
-      {/* Calendrier */}
       <div className='bg-white rounded-lg border p-4 sm:p-6'>
         <Calendar
           mode='single'
@@ -100,7 +92,6 @@ export function CalendarView({
         />
       </div>
 
-      {/* Légende */}
       <div className='flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground'>
         <div className='flex justify-center items-center gap-2'>
           <div className='w-1.5 h-1.5 bg-green-500 rounded-full'></div>
@@ -108,18 +99,8 @@ export function CalendarView({
         </div>
       </div>
 
-      {/* Modale de consultation d'événement */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className='max-w-sm sm:max-w-md'>
-          <DialogHeader>
-            <DialogTitle className='flex items-center gap-2 text-base sm:text-lg'>
-              <Mountain className='h-4 w-4 sm:h-5 sm:w-5' />
-              Randonnée du{' '}
-              {selectedDate &&
-                format(selectedDate, 'EEEE d MMMM yyyy', { locale: fr })}
-            </DialogTitle>
-          </DialogHeader>
-
           {selectedDate &&
             (() => {
               const event = getEventForDate(selectedDate);
@@ -127,23 +108,12 @@ export function CalendarView({
 
               return (
                 <div className='space-y-3 sm:space-y-4'>
-                  <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4'>
-                    <div className='flex items-center gap-2'>
-                      <MapPin className='h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground flex-shrink-0' />
-                      <span className='font-medium text-sm sm:text-base truncate'>
-                        {event.location.name}
-                      </span>
-                    </div>
-                    <Badge variant='outline' className='text-xs w-fit'>
-                      {format(event.date, 'dd/MM/yyyy')}
-                    </Badge>
-                  </div>
-
                   {event.weather ? (
                     <WeatherCard
                       date={event.date}
                       location={event.location.name}
                       weather={event.weather}
+                      isFromModal
                     />
                   ) : (
                     <div className='text-center py-6 sm:py-8 text-muted-foreground'>
@@ -170,31 +140,15 @@ export function CalendarView({
         </DialogContent>
       </Dialog>
 
-      {/* Modale d'ajout d'événement */}
       <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
         <DialogContent className='max-w-sm sm:max-w-md'>
-          <DialogHeader>
-            <DialogTitle className='flex items-center gap-2 text-base sm:text-lg'>
-              <Plus className='h-4 w-4 sm:h-5 sm:w-5' />
-              Ajouter une randonnée le{' '}
-              {selectedDate &&
-                format(selectedDate, 'EEEE d MMMM yyyy', { locale: fr })}
-            </DialogTitle>
-          </DialogHeader>
-
-          <div className='space-y-3 sm:space-y-4'>
-            <p className='text-xs sm:text-sm text-muted-foreground'>
-              Sélectionnez une localisation pour ajouter une randonnée à cette
-              date.
-            </p>
-
-            <TripForm
-              onAddHikingDay={handleAddFromModal}
-              isLoading={false}
-              hideDatePicker={true}
-              defaultDate={selectedDate}
-            />
-          </div>
+          <TripForm
+            onAddHikingDay={handleAddFromModal}
+            isLoading={false}
+            hideDatePicker={true}
+            defaultDate={selectedDate}
+            isFromModal
+          />
         </DialogContent>
       </Dialog>
     </div>

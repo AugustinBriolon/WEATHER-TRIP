@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+import { useLocationSearch } from '@/hooks/use-weather';
 import { LocationSearchResult } from '@/types/weather';
-import { searchLocation } from '@/lib/weather-api';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { CalendarIcon, MapPin, Search, Loader2, Plus } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { CalendarIcon, Loader2, MapPin, Search } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 interface TripFormProps {
   onAddHikingDay: (date: Date, location: LocationSearchResult) => void;
   isLoading?: boolean;
   hideDatePicker?: boolean;
   defaultDate?: Date;
+  isFromModal?: boolean;
 }
 
 export function TripForm({
@@ -29,51 +30,43 @@ export function TripForm({
   isLoading = false,
   hideDatePicker = false,
   defaultDate,
+  isFromModal = false,
 }: TripFormProps) {
   const [date, setDate] = useState<Date | undefined>(defaultDate);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<LocationSearchResult[]>(
-    []
-  );
   const [selectedLocation, setSelectedLocation] =
     useState<LocationSearchResult | null>(null);
-  const [isSearching, setIsSearching] = useState(false);
-  const [showResults, setShowResults] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
 
-  // Mettre à jour la date si defaultDate change
-  React.useEffect(() => {
+  const {
+    data: searchResults = [],
+    isLoading: isSearching,
+    error,
+  } = useLocationSearch(searchQuery);
+
+  useEffect(() => {
+    if (error) {
+      toast.error('Erreur lors de la recherche de localisation', {
+        description: error.message || 'Vérifiez votre connexion internet',
+      });
+    }
+  }, [error]);
+
+  useEffect(() => {
     if (defaultDate) {
       setDate(defaultDate);
     }
   }, [defaultDate]);
 
-  const handleLocationSearch = async () => {
-    if (!searchQuery.trim()) return;
-
-    setIsSearching(true);
-    try {
-      const results = await searchLocation(searchQuery);
-      setSearchResults(results);
-      setShowResults(true);
-    } catch (error) {
-      console.error('Erreur lors de la recherche de localisation:', error);
-      setSearchResults([]);
-    } finally {
-      setIsSearching(false);
-    }
-  };
-
   const handleLocationSelect = (location: LocationSearchResult) => {
     setSelectedLocation(location);
     setSearchQuery(`${location.name}, ${location.country}`);
-    setShowResults(false);
   };
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
     setDate(selectedDate);
     if (selectedDate) {
-      setCalendarOpen(false); // Fermer le calendrier après sélection
+      setCalendarOpen(false);
     }
   };
 
@@ -87,31 +80,31 @@ export function TripForm({
 
     onAddHikingDay(date, selectedLocation);
 
-    // Reset form seulement si pas en mode modal
     if (!hideDatePicker) {
       setDate(undefined);
       setSearchQuery('');
       setSelectedLocation(null);
-      setSearchResults([]);
     }
   };
 
   return (
-    <Card className='h-fit'>
-      <CardHeader className='pb-4'>
+    <Card className={cn('h-fit', isFromModal && 'border-0 shadow-none p-0')}>
+      <CardHeader className={cn(isFromModal && 'p-0')}>
         <CardTitle className='text-lg sm:text-xl flex items-center gap-2'>
-          <Plus className='h-4 w-4 sm:h-5 sm:w-5' />
-          {hideDatePicker
-            ? 'Ajouter une randonnée'
-            : 'Ajouter un jour de randonnée'}
+          Ajouter un itinéraire
         </CardTitle>
       </CardHeader>
 
-      <CardContent>
-        <form onSubmit={handleSubmit} className='space-y-4'>
-          {/* Date Picker - caché si hideDatePicker est true */}
+      <CardContent className={cn(isFromModal && 'p-0')}>
+        <form
+          onSubmit={handleSubmit}
+          className={cn(
+            'flex items-end justify-start gap-4 flex-wrap',
+            isFromModal && 'flex-col items-start gap-2'
+          )}
+        >
           {!hideDatePicker && (
-            <div className='space-y-2'>
+            <div className={cn('space-y-2', isFromModal && 'w-full')}>
               <Label htmlFor='date' className='text-sm sm:text-base'>
                 Date de randonnée
               </Label>
@@ -120,11 +113,11 @@ export function TripForm({
                   <Button
                     variant='outline'
                     className={cn(
-                      'w-full justify-start text-left font-normal text-sm sm:text-base',
+                      'w-full justify-start text-left text-sm',
                       !date && 'text-muted-foreground'
                     )}
                   >
-                    <CalendarIcon className='mr-2 h-3 w-3 sm:h-4 sm:w-4' />
+                    <CalendarIcon className='h-3 w-3 sm:h-4 sm:w-4' />
                     {date
                       ? format(date, 'PPP', { locale: fr })
                       : 'Sélectionner une date'}
@@ -136,18 +129,18 @@ export function TripForm({
                     selected={date}
                     onSelect={handleDateSelect}
                     disabled={(date) => date < new Date()}
-                    weekStartsOn={1} // 1 = Lundi, 0 = Dimanche
+                    weekStartsOn={1}
                   />
                 </PopoverContent>
               </Popover>
             </div>
           )}
 
-          {/* Affichage de la date sélectionnée en mode modal */}
           {hideDatePicker && date && (
-            <div className='space-y-2'>
+            <div className={cn('space-y-2', isFromModal && 'w-full')}>
               <Label className='text-sm sm:text-base'>Date sélectionnée</Label>
-              <div className='p-3 bg-muted rounded-md'>
+              <div className='p-3 bg-muted rounded-md flex items-center gap-2'>
+                <CalendarIcon className='h-3 w-3 sm:h-4 sm:w-4' />
                 <span className='font-medium text-sm sm:text-base'>
                   {format(date, 'EEEE d MMMM yyyy', { locale: fr })}
                 </span>
@@ -155,8 +148,7 @@ export function TripForm({
             </div>
           )}
 
-          {/* Location Search */}
-          <div className='space-y-2'>
+          <div className={cn('space-y-2', isFromModal && 'w-full')}>
             <Label htmlFor='location' className='text-sm sm:text-base'>
               Localisation
             </Label>
@@ -173,7 +165,6 @@ export function TripForm({
               />
             </div>
 
-            {/* Résultats de recherche */}
             {searchResults.length > 0 && (
               <div className='max-h-48 overflow-y-auto border rounded-md'>
                 {searchResults.map((result) => (
@@ -197,8 +188,7 @@ export function TripForm({
               </div>
             )}
 
-            {/* État de chargement */}
-            {isLoading && (
+            {isSearching && (
               <div className='flex items-center gap-2 text-sm text-muted-foreground'>
                 <Loader2 className='h-3 w-3 sm:h-4 sm:w-4 animate-spin' />
                 Recherche en cours...
@@ -206,22 +196,15 @@ export function TripForm({
             )}
           </div>
 
-          {/* Bouton de soumission */}
           <Button
+            className={cn(isFromModal && 'w-full')}
             type='submit'
-            className='w-full'
             disabled={!date || !selectedLocation || isLoading}
           >
             {isLoading ? (
-              <>
-                <Loader2 className='mr-2 h-3 w-3 sm:h-4 sm:w-4 animate-spin' />
-                Ajout en cours...
-              </>
+              <Loader2 className='h-3 w-3 sm:h-4 sm:w-4 animate-spin' />
             ) : (
-              <>
-                <Plus className='mr-2 h-3 w-3 sm:h-4 sm:w-4' />
-                Ajouter
-              </>
+              'Ajouter'
             )}
           </Button>
         </form>

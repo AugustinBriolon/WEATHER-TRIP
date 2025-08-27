@@ -29,7 +29,6 @@ export function loadHikingDays(): HikingDay[] {
 
     const data: StoredData = JSON.parse(stored);
 
-    // Convertir les dates string en objets Date
     const hikingDays = data.hikingDays.map((day) => ({
       ...day,
       date: new Date(day.date),
@@ -71,9 +70,8 @@ export function getLastUpdated(): number | null {
   }
 }
 
-// Fonction pour vérifier si les données météo sont encore valides (24h)
 export function isWeatherDataValid(lastUpdated: number): boolean {
   const now = Date.now();
-  const twentyFourHours = 24 * 60 * 60 * 1000; // 24 heures en millisecondes
+  const twentyFourHours = 24 * 60 * 60 * 1000;
   return now - lastUpdated < twentyFourHours;
 }

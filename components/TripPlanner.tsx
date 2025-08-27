@@ -1,47 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { TripForm } from './TripForm';
-import { WeatherCard } from './WeatherCard';
-import { CalendarView } from './CalendarView';
-import { ListView } from './ListView';
-import { HikingDay, LocationSearchResult } from '@/types/weather';
-import { getWeatherForecast } from '@/lib/weather-api';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  saveHikingDays,
-  loadHikingDays,
   clearHikingDays,
   getLastUpdated,
   isWeatherDataValid,
+  loadHikingDays,
+  saveHikingDays,
 } from '@/lib/storage';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { useRefreshWeather, useRefreshAllWeather } from '@/hooks/use-weather';
+import { HikingDay, LocationSearchResult } from '@/types/weather';
 import {
-  Mountain,
   Calendar,
-  MapPin,
-  Trash2,
-  RefreshCw,
-  Loader2,
-  Download,
-  Upload,
-  RotateCcw,
-  List,
   Grid,
-  Plus,
+  List,
+  Loader2,
+  Mountain,
+  RefreshCw,
+  Trash2,
+  Upload,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import { CalendarView } from './CalendarView';
+import { ListView } from './ListView';
+import { TripForm } from './TripForm';
 
 type ViewMode = 'list' | 'calendar';
 
 export function TripPlanner() {
   const [hikingDays, setHikingDays] = useState<HikingDay[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadingDayId, setLoadingDayId] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const refreshWeatherMutation = useRefreshWeather();
+  const refreshAllWeatherMutation = useRefreshAllWeather();
 
-  // Charger les données au démarrage
   useEffect(() => {
     const loadSavedData = async () => {
       const savedDays = loadHikingDays();
@@ -50,13 +42,10 @@ export function TripPlanner() {
       if (savedDays.length > 0) {
         setHikingDays(savedDays);
 
-        // Vérifier si les données météo sont encore valides
         if (lastUpdated && !isWeatherDataValid(lastUpdated)) {
           console.log('Données météo expirées, actualisation nécessaire');
-          // Actualiser automatiquement les données expirées
           await refreshMissingWeatherData();
         } else {
-          // Actualiser les données météo manquantes
           await refreshMissingWeatherData();
         }
       }
@@ -67,18 +56,15 @@ export function TripPlanner() {
     loadSavedData();
   }, []);
 
-  // Fonction pour actualiser les données météo manquantes
   const refreshMissingWeatherData = async () => {
     const daysWithoutWeather = hikingDays.filter((day) => !day.weather);
 
     for (const day of daysWithoutWeather) {
-      await fetchWeatherForDay(day);
-      // Petite pause pour éviter de surcharger l'API
+      await handleRefreshWeather(day);
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
   };
 
-  // Sauvegarder les données à chaque modification
   useEffect(() => {
     if (isInitialized) {
       saveHikingDays(hikingDays);
@@ -104,27 +90,23 @@ export function TripPlanner() {
 
     setHikingDays((prev) => [...prev, newDay]);
 
-    // Charger la météo pour ce jour spécifique
-    await fetchWeatherForDay(newDay, date);
+    await handleRefreshWeather(newDay);
   };
 
-  const fetchWeatherForDay = async (day: HikingDay, targetDate?: Date) => {
+  const handleRefreshWeather = async (day: HikingDay) => {
     if (!day.location.coordinates) {
-      console.error(
-        'No coordinates available for location:',
-        day.location.name
-      );
+      toast.error('Coordonnées manquantes', {
+        description: `Impossible de récupérer la météo pour ${day.location.name}`,
+      });
       return;
     }
 
-    setLoadingDayId(day.id);
-
     try {
-      const weatherData = await getWeatherForecast(
-        day.location.coordinates.lat,
-        day.location.coordinates.lon,
-        targetDate || day.date
-      );
+      const weatherData = await refreshWeatherMutation.mutateAsync({
+        lat: day.location.coordinates.lat,
+        lon: day.location.coordinates.lon,
+        targetDate: day.date,
+      });
 
       if (weatherData) {
         setHikingDays((prev) =>
@@ -135,22 +117,18 @@ export function TripPlanner() {
       }
     } catch (error) {
       console.error('Error fetching weather for day:', error);
-    } finally {
-      setLoadingDayId(null);
     }
-  };
-
-  const handleRefreshWeather = async (day: HikingDay) => {
-    await fetchWeatherForDay(day);
   };
 
   const handleRemoveDay = (dayId: string) => {
     setHikingDays((prev) => prev.filter((day) => day.id !== dayId));
+    toast.success('Journée supprimée');
   };
 
   const handleClearAll = () => {
     setHikingDays([]);
     clearHikingDays();
+    toast.success('Toutes les données ont été supprimées');
   };
 
   const handleImportHikingData = async () => {
@@ -178,33 +156,41 @@ export function TripPlanner() {
           return [...prev, ...newDays];
         });
 
-        console.log(
-          `${importedDays.length} jours de randonnée importés avec succès`
-        );
+        toast.success('Import réussi', {
+          description: `${importedDays.length} jours de randonnée importés`,
+        });
       } else {
         throw new Error('Format de données invalide dans hiking.json');
       }
     } catch (error) {
       console.error("Erreur lors de l'import du fichier hiking.json:", error);
-      alert("Erreur lors de l'import du fichier hiking.json");
+      toast.error("Erreur lors de l'import", {
+        description: 'Impossible de charger le fichier hiking.json',
+      });
     }
   };
 
   const handleRefreshAllWeather = async () => {
-    setIsLoading(true);
-    try {
-      const daysWithCoordinates = hikingDays.filter(
-        (day) => day.location.coordinates
-      );
+    const daysWithCoordinates = hikingDays.filter(
+      (day) => day.location.coordinates
+    );
 
-      for (const day of daysWithCoordinates) {
-        await fetchWeatherForDay(day);
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
+    if (daysWithCoordinates.length === 0) {
+      toast.info('Aucune donnée à actualiser');
+      return;
+    }
+
+    try {
+      await refreshAllWeatherMutation.mutateAsync(
+        daysWithCoordinates.map((day) => ({
+          lat: day.location.coordinates!.lat,
+          lon: day.location.coordinates!.lon,
+          date: day.date,
+        }))
+      );
+      setHikingDays((prev) => [...prev]);
     } catch (error) {
       console.error("Erreur lors de l'actualisation des données météo:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -220,8 +206,8 @@ export function TripPlanner() {
   }
 
   return (
-    <div className='container mx-auto p-4 sm:p-6 max-w-7xl'>
-      <div className='mb-6 sm:mb-8'>
+    <div className='container mx-auto p-2 sm:p-6 max-w-7xl'>
+      <div className='my-6 sm:mb-8'>
         <h1 className='text-2xl sm:text-3xl font-bold text-center mb-2 flex items-center justify-center gap-2'>
           <Mountain className='h-6 w-6 sm:h-8 sm:w-8 text-green-600' />
           <span className='hidden sm:inline'>
@@ -234,96 +220,92 @@ export function TripPlanner() {
         </p>
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6'>
-        {/* Form Section */}
-        <div className='lg:col-span-1 order-1'>
-          <TripForm onAddHikingDay={handleAddHikingDay} isLoading={isLoading} />
-        </div>
+      <div className='flex flex-col gap-4 sm:gap-6'>
+        <TripForm
+          onAddHikingDay={handleAddHikingDay}
+          isLoading={refreshWeatherMutation.isPending}
+        />
 
-        {/* Trip Overview */}
-        <div className='lg:col-span-3 order-2'>
-          <Card>
-            <CardHeader className='pb-4'>
-              <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
-                <CardTitle className='flex items-center gap-2 text-lg sm:text-xl'>
-                  <Calendar className='h-4 w-4 sm:h-5 sm:w-5' />
-                  <span className='hidden sm:inline'>
-                    Mon Voyage de Randonnée
-                  </span>
-                  <span className='sm:hidden'>Mon Voyage</span>
-                </CardTitle>
-                <div className='flex items-center gap-2 flex-wrap'>
+        <Card className='gap-4'>
+          <CardHeader>
+            <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
+              <CardTitle className='text-lg sm:text-xl'>
+                <span className='sm:hidden'>Mon Voyage</span>
+              </CardTitle>
+              <div className='flex items-center justify-between gap-2 flex-wrap'>
+                <div className='flex items-center gap-1 border rounded-md'>
                   <Button
-                    variant='outline'
                     size='sm'
-                    onClick={handleImportHikingData}
-                    className='text-xs sm:text-sm h-7 sm:h-8 px-2 sm:px-3'
+                    variant={viewMode === 'list' ? 'default' : 'ghost'}
+                    onClick={() => setViewMode('list')}
                   >
-                    <Upload className='h-3 w-3 sm:h-4 sm:w-4 mr-1' />
-                    <span className='hidden sm:inline'>Importer</span>
+                    <List className='h-4 w-4' />
                   </Button>
-                  <div className='flex items-center gap-1 border rounded-md'>
+                  <Button
+                    size='sm'
+                    variant={viewMode === 'calendar' ? 'default' : 'ghost'}
+                    onClick={() => setViewMode('calendar')}
+                  >
+                    <Grid className='h-4 w-4' />
+                  </Button>
+                </div>
+
+                {hikingDays.length > 0 && (
+                  <div className='flex gap-1'>
                     <Button
+                      variant='outline'
                       size='sm'
-                      variant={viewMode === 'list' ? 'default' : 'ghost'}
-                      onClick={() => setViewMode('list')}
-                      className='p-0'
+                      onClick={handleImportHikingData}
+                      className='text-sm h-8 px-3'
                     >
-                      <List className='h-3 w-3 sm:h-4 sm:w-4' />
+                      <Upload className='h-4 w-4' />
                     </Button>
                     <Button
                       size='sm'
-                      variant={viewMode === 'calendar' ? 'default' : 'ghost'}
-                      onClick={() => setViewMode('calendar')}
-                      className='p-0'
+                      variant='outline'
+                      onClick={handleRefreshAllWeather}
+                      disabled={refreshAllWeatherMutation.isPending}
+                      className='text-sm h-8 px-3'
                     >
-                      <Grid className='h-3 w-3 sm:h-4 sm:w-4' />
+                      {refreshAllWeatherMutation.isPending ? (
+                        <Loader2 className='h-4 w-4 animate-spin' />
+                      ) : (
+                        <RefreshCw className='h-4 w-4' />
+                      )}
+                    </Button>
+                    <Button
+                      size='sm'
+                      variant='outline'
+                      onClick={handleClearAll}
+                      className='text-sm h-8 px-3 text-red-600 hover:text-red-700 hover:bg-red-50'
+                    >
+                      <Trash2 className='h-4 w-4' />
                     </Button>
                   </div>
-
-                  {hikingDays.length > 0 && (
-                    <div className='flex gap-1'>
-                      <Button
-                        size='sm'
-                        variant='outline'
-                        onClick={handleRefreshAllWeather}
-                        disabled={isLoading}
-                        className='text-xs sm:text-sm h-7 sm:h-8 px-2 sm:px-3'
-                      >
-                        <RefreshCw className='h-3 w-3 sm:h-4 sm:w-4' />
-                      </Button>
-                      <Button
-                        size='sm'
-                        variant='outline'
-                        onClick={handleClearAll}
-                        className='text-xs sm:text-sm h-7 sm:h-8 px-2 sm:px-3 text-red-600 hover:text-red-700 hover:bg-red-50'
-                      >
-                        <Trash2 className='h-3 w-3 sm:h-4 sm:w-4' />
-                      </Button>
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
-            </CardHeader>
+            </div>
+          </CardHeader>
 
-            <CardContent className='pt-0'>
-              {viewMode === 'calendar' ? (
-                <CalendarView
-                  hikingDays={hikingDays}
-                  onAddHikingDay={handleAddHikingDay}
-                  onRemoveDay={handleRemoveDay}
-                />
-              ) : (
-                <ListView
-                  hikingDays={hikingDays}
-                  onRemoveDay={handleRemoveDay}
-                  onRefreshWeather={handleRefreshWeather}
-                  loadingDayId={loadingDayId}
-                />
-              )}
-            </CardContent>
-          </Card>
-        </div>
+          <CardContent className='pt-0'>
+            {viewMode === 'calendar' ? (
+              <CalendarView
+                hikingDays={hikingDays}
+                onAddHikingDay={handleAddHikingDay}
+                onRemoveDay={handleRemoveDay}
+              />
+            ) : (
+              <ListView
+                hikingDays={hikingDays}
+                onRemoveDay={handleRemoveDay}
+                onRefreshWeather={handleRefreshWeather}
+                loadingDayId={
+                  refreshWeatherMutation.isPending ? 'loading' : null
+                }
+              />
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

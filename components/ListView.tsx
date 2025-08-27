@@ -71,6 +71,10 @@ export function ListView({
     return 'text-red-600';
   };
 
+  const isDayLoading = (dayId: string) => {
+    return loadingDayId === 'loading' || loadingDayId === dayId;
+  };
+
   if (hikingDays.length === 0) {
     return (
       <div className='text-center py-12 text-muted-foreground'>
@@ -85,14 +89,10 @@ export function ListView({
 
   return (
     <div className='space-y-4'>
-      {/* En-tête avec statistiques */}
-      <div className='bg-gradient-to-r from-slate-50 to-blue-50 rounded-lg border border-slate-200 p-4 sm:p-6 mb-4 sm:mb-6'>
-        <div className='flex items-center gap-2 mb-3 sm:mb-4'>
-          <Mountain className='h-4 w-4 sm:h-5 sm:w-5 text-slate-600' />
-          <h2 className='text-base sm:text-lg font-semibold text-slate-800'>
-            Aperçu du voyage
-          </h2>
-        </div>
+      <div className='bg-white rounded-lg border border-slate-200 p-4 sm:p-6'>
+        <h2 className='text-base sm:text-lg font-semibold text-slate-800 mb-3 sm:mb-4'>
+          Aperçu du voyage
+        </h2>
 
         <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4'>
           <div className='text-center'>
@@ -155,7 +155,6 @@ export function ListView({
         </div>
       </div>
 
-      {/* Alertes contextuelles */}
       {(() => {
         const highRainDays = hikingDays.filter(
           (day) => day.weather && day.weather.precipitation > 70
@@ -177,22 +176,21 @@ export function ListView({
           hotDays.length > 0
         ) {
           return (
-            <div className='mb-4 sm:mb-6 space-y-2'>
+            <div className='space-y-2'>
               {highRainDays.length > 0 && (
-                <div className='flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-orange-50 border border-orange-200 rounded-lg'>
-                  <Droplets className='h-4 w-4 sm:h-5 sm:w-5 text-orange-600 flex-shrink-0' />
+                <div className='flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-blue-50 text-blue-900 border border-blue-200 rounded-lg'>
+                  <Droplets className='h-4 w-4 sm:h-5 sm:w-5 text-blue-900 flex-shrink-0' />
                   <div className='text-xs sm:text-sm min-w-0 flex-1'>
-                    <span className='font-medium text-orange-800'>
-                      Pluie forte
+                    <span className='font-medium'>
+                      Pluie forte le
                     </span>
-                    <span className='text-orange-700'>
+                    <span className='text-red-500'>
                       {' '}
-                      le{' '}
                       {highRainDays
                         .map((day) => format(day.date, 'dd/MM'))
                         .join(', ')}
                     </span>
-                    <span className='text-orange-600'>
+                    <span>
                       {' '}
                       - Équipement imperméable recommandé
                     </span>
@@ -271,8 +269,7 @@ export function ListView({
         return null;
       })()}
 
-      {/* Liste des jours */}
-      <div className='grid gap-3 sm:gap-4'>
+      <div className='grid gap-2'>
         {sortedHikingDays.map((day) => {
           const weatherSummary = getWeatherSummary(day);
           const isToday =
@@ -294,7 +291,6 @@ export function ListView({
             >
               <CardContent className='p-4 sm:p-6'>
                 <div className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4'>
-                  {/* Informations principales */}
                   <div className='flex-1 min-w-0'>
                     <div className='flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-3'>
                       <div className='flex items-center gap-2'>
@@ -325,7 +321,6 @@ export function ListView({
                       </span>
                     </div>
 
-                    {/* Résumé météo */}
                     {weatherSummary ? (
                       <div className='flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4'>
                         <div className='flex items-center gap-2'>
@@ -362,9 +357,8 @@ export function ListView({
                     )}
                   </div>
 
-                  {/* Actions */}
                   <div className='flex items-center gap-2 sm:ml-4'>
-                    {loadingDayId === day.id ? (
+                    {isDayLoading(day.id) ? (
                       <div className='flex items-center gap-2 text-muted-foreground'>
                         <Loader2 className='h-3 w-3 sm:h-4 sm:w-4 animate-spin' />
                         <span className='text-xs sm:text-sm'>
