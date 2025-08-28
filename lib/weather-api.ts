@@ -17,7 +17,7 @@ export async function searchLocation(
     throw new Error('OpenWeather API key not configured');
   }
 
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
+  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
     query
   )}&limit=5&appid=${OPENWEATHER_API_KEY}`;
 
