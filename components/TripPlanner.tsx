@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useRefreshAllWeather, useRefreshWeather } from '@/hooks/use-weather';
 import {
   clearHikingDays,
   getLastUpdated,
@@ -7,13 +8,12 @@ import {
   loadHikingDays,
   saveHikingDays,
 } from '@/lib/storage';
-import { useRefreshWeather, useRefreshAllWeather } from '@/hooks/use-weather';
 import { HikingDay, LocationSearchResult } from '@/types/weather';
 import {
-  Calendar,
   Grid,
   List,
   Loader2,
+  MapPin,
   Mountain,
   RefreshCw,
   Trash2,
@@ -23,9 +23,10 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { CalendarView } from './CalendarView';
 import { ListView } from './ListView';
+import { MapView } from './MapView';
 import { TripForm } from './TripForm';
 
-type ViewMode = 'list' | 'calendar';
+type ViewMode = 'list' | 'calendar' | 'map';
 
 export function TripPlanner() {
   const [hikingDays, setHikingDays] = useState<HikingDay[]>([]);
@@ -33,6 +34,8 @@ export function TripPlanner() {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const refreshWeatherMutation = useRefreshWeather();
   const refreshAllWeatherMutation = useRefreshAllWeather();
+
+  console.log(hikingDays);
 
   useEffect(() => {
     const loadSavedData = async () => {
@@ -142,10 +145,29 @@ export function TripPlanner() {
 
       if (data.hikingDays && Array.isArray(data.hikingDays)) {
         const importedDays: HikingDay[] = data.hikingDays.map(
-          (day: HikingDay & { date: string }) => ({
-            ...day,
-            date: new Date(day.date),
-          })
+          (day: HikingDay & { date: string }) => {
+            // Corriger le décalage de date en ajustant l'heure
+            const originalDate = new Date(day.date);
+            // Créer une nouvelle date à midi pour éviter les problèmes de fuseau horaire
+            const correctedDate = new Date(
+              originalDate.getFullYear(),
+              originalDate.getMonth(),
+              originalDate.getDate(),
+              12,
+              0,
+              0,
+              0
+            );
+
+            return {
+              ...day,
+              date: correctedDate,
+              // Mettre à jour l'ID avec la nouvelle date
+              id: `${correctedDate.getTime()}-${
+                day.location.coordinates?.lat
+              }-${day.location.coordinates?.lon}`,
+            };
+          }
         );
 
         setHikingDays((prev) => {
@@ -181,14 +203,25 @@ export function TripPlanner() {
     }
 
     try {
-      await refreshAllWeatherMutation.mutateAsync(
+      const updatedWeatherData = await refreshAllWeatherMutation.mutateAsync(
         daysWithCoordinates.map((day) => ({
           lat: day.location.coordinates!.lat,
           lon: day.location.coordinates!.lon,
           date: day.date,
         }))
       );
-      setHikingDays((prev) => [...prev]);
+
+      setHikingDays((prev) =>
+        prev.map((day, _) => {
+          const dayIndex = daysWithCoordinates.findIndex(
+            (d) => d.id === day.id
+          );
+          if (dayIndex !== -1 && updatedWeatherData[dayIndex]) {
+            return { ...day, weather: updatedWeatherData[dayIndex] };
+          }
+          return day;
+        })
+      );
     } catch (error) {
       console.error("Erreur lors de l'actualisation des données météo:", error);
     }
@@ -248,6 +281,13 @@ export function TripPlanner() {
                   >
                     <Grid className='h-4 w-4' />
                   </Button>
+                  <Button
+                    size='sm'
+                    variant={viewMode === 'map' ? 'default' : 'ghost'}
+                    onClick={() => setViewMode('map')}
+                  >
+                    <MapPin className='h-4 w-4' />
+                  </Button>
                 </div>
 
                 {hikingDays.length > 0 && (
@@ -294,6 +334,8 @@ export function TripPlanner() {
                 onAddHikingDay={handleAddHikingDay}
                 onRemoveDay={handleRemoveDay}
               />
+            ) : viewMode === 'map' ? (
+              <MapView />
             ) : (
               <ListView
                 hikingDays={hikingDays}

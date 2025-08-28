@@ -1,4 +1,4 @@
-# Planificateur Météo Randonnée
+# WEATHER-TRIP
 
 Une application Next.js 15 pour planifier vos randonnées avec les prévisions météo en temps réel.
 
@@ -47,45 +47,33 @@ Une application Next.js 15 pour planifier vos randonnées avec les prévisions m
 
    ```
    NEXT_PUBLIC_OPENWEATHER_API_KEY=votre_cle_api_ici
+   NEXT_PUBLIC_MAPBOX_TOKEN=votre_token_mapbox_ici
    ```
 
-4. **Obtenez une clé API gratuite**
+4. **Obtenez une clé API OpenWeatherMap**
 
    - Allez sur [OpenWeatherMap](https://openweathermap.org/api)
    - Créez un compte gratuit
    - Obtenez votre clé API
    - Collez-la dans le fichier `.env.local`
 
-5. **Lancez l'application**
+5. **Obtenez un token Mapbox**
+
+   - Allez sur [Mapbox](https://www.mapbox.com/)
+   - Créez un compte gratuit
+   - Obtenez votre token Mapbox
+   - Collez-le dans le fichier `.env.local`
+
+6. **Lancez l'application**
 
    ```bash
    npm run dev
    ```
 
-6. **Ouvrez votre navigateur**
+7. **Ouvrez votre navigateur**
    ```
    http://localhost:3000
    ```
-
-## 📁 Structure du projet
-
-```
-weather-map/
-├── components/
-│   ├── ui/                 # Composants shadcn/ui
-│   ├── TripForm.tsx        # Formulaire d'ajout de randonnée
-│   ├── WeatherCard.tsx     # Carte d'affichage météo
-│   └── TripPlanner.tsx     # Composant principal
-├── lib/
-│   ├── utils.ts           # Utilitaires shadcn
-│   └── weather-api.ts     # API météo
-├── types/
-│   └── weather.ts         # Types TypeScript
-├── pages/
-│   └── index.tsx          # Page principale
-└── styles/
-    └── globals.css        # Styles globaux
-```
 
 ## 🎯 Utilisation
 
@@ -111,6 +99,7 @@ weather-map/
 ### Variables d'environnement
 
 - `NEXT_PUBLIC_OPENWEATHER_API_KEY` : Votre clé API OpenWeatherMap
+- `NEXT_PUBLIC_MAPBOX_TOKEN` : Votre token Mapbox
 
 ### API Météo
 
@@ -143,7 +132,8 @@ L'application utilise le thème neutre de shadcn/ui, personnalisable dans `compo
 
 1. Connectez votre repo GitHub à Vercel
 2. Ajoutez la variable d'environnement `NEXT_PUBLIC_OPENWEATHER_API_KEY`
-3. Déployez !
+3. Ajoutez la variable d'environnement `NEXT_PUBLIC_MAPBOX_TOKEN`
+4. Déployez !
 
 ### Autres plateformes
 
@@ -164,4 +154,3 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 ---
 
 **Bonnes randonnées ! 🏔️**
-# WEATHER-TRIP

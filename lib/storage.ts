@@ -29,10 +29,25 @@ export function loadHikingDays(): HikingDay[] {
 
     const data: StoredData = JSON.parse(stored);
 
-    const hikingDays = data.hikingDays.map((day) => ({
-      ...day,
-      date: new Date(day.date),
-    }));
+    const hikingDays = data.hikingDays.map((day) => {
+      // Corriger le décalage de date en ajustant l'heure
+      const originalDate = new Date(day.date);
+      // Créer une nouvelle date à midi pour éviter les problèmes de fuseau horaire
+      const correctedDate = new Date(
+        originalDate.getFullYear(),
+        originalDate.getMonth(),
+        originalDate.getDate(),
+        12,
+        0,
+        0,
+        0
+      );
+
+      return {
+        ...day,
+        date: correctedDate,
+      };
+    });
 
     console.log(
       'Données chargées depuis le localStorage:',

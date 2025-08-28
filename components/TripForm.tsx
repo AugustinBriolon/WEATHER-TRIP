@@ -148,7 +148,7 @@ export function TripForm({
             </div>
           )}
 
-          <div className={cn('space-y-2', isFromModal && 'w-full')}>
+          <div className={cn('space-y-2', isFromModal && 'w-full relative')}>
             <Label htmlFor='location' className='text-sm sm:text-base'>
               Localisation
             </Label>
@@ -163,30 +163,29 @@ export function TripForm({
                 className='pl-9 text-sm sm:text-base'
                 disabled={isLoading}
               />
+              {searchResults.length > 0 && (
+                <div className='max-h-48 overflow-y-auto border rounded-md absolute top-full left-0 w-full'>
+                  {searchResults.map((result) => (
+                    <button
+                      key={`${result.lat}-${result.lon}`}
+                      type='button'
+                      onClick={() => handleLocationSelect(result)}
+                      className='w-full p-3 text-left hover:bg-muted flex items-center gap-2 border-b last:border-b-0 bg-white'
+                    >
+                      <MapPin className='h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground flex-shrink-0' />
+                      <div className='min-w-0 flex-1'>
+                        <div className='font-medium text-sm sm:text-base truncate'>
+                          {result.name}
+                        </div>
+                        <div className='text-xs sm:text-sm text-muted-foreground truncate'>
+                          {result.country}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-
-            {searchResults.length > 0 && (
-              <div className='max-h-48 overflow-y-auto border rounded-md'>
-                {searchResults.map((result) => (
-                  <button
-                    key={`${result.lat}-${result.lon}`}
-                    type='button'
-                    onClick={() => handleLocationSelect(result)}
-                    className='w-full p-3 text-left hover:bg-muted flex items-center gap-2 border-b last:border-b-0'
-                  >
-                    <MapPin className='h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground flex-shrink-0' />
-                    <div className='min-w-0 flex-1'>
-                      <div className='font-medium text-sm sm:text-base truncate'>
-                        {result.name}
-                      </div>
-                      <div className='text-xs sm:text-sm text-muted-foreground truncate'>
-                        {result.country}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
 
             {isSearching && (
               <div className='flex items-center gap-2 text-sm text-muted-foreground'>

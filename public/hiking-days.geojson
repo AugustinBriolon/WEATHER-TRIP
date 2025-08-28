@@ -1,0 +1,365 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 1,
+        "name": "Le Puy-en-Velay",
+        "notes": "Départ, gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.885, 45.043]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 2,
+        "name": "Saint-Privat-d’Allier",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.633, 44.983]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 3,
+        "name": "Saugues",
+        "notes": "Bivouac possible"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.55, 44.966]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 4,
+        "name": "Auberge du Sauvage (Gévaudan)",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.48703, 44.82448]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 5,
+        "name": "Saint-Alban-sur-Limagnole",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.516, 44.733]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 6,
+        "name": "Aumont-Aubrac",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.283, 44.716]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 7,
+        "name": "Nasbinals",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.05, 44.683]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 8,
+        "name": "Aubrac",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.983, 44.65]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 9,
+        "name": "Saint-Chély-d’Aubrac",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.95, 44.583]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 10,
+        "name": "Espalion",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.75, 44.517]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 11,
+        "name": "Estaing",
+        "notes": "Bivouac possible"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.666, 44.55]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 12,
+        "name": "Golinhac",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.55, 44.55]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 13,
+        "name": "Conques",
+        "notes": "Bivouac ou gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.4, 44.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 14,
+        "name": "Livinhac-le-Haut",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.283, 44.55]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 15,
+        "name": "Figeac",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.033, 44.6]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 16,
+        "name": "Cajarc",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.85, 44.483]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 17,
+        "name": "Limogne-en-Quercy",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.783, 44.417]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 18,
+        "name": "Lalbenque",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.55, 44.383]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 19,
+        "name": "Cahors",
+        "notes": "Repos, gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.433, 44.45]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 20,
+        "name": "Lascabanes",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.3, 44.383]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 21,
+        "name": "Lauzerte",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.133, 44.267]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 22,
+        "name": "Moissac",
+        "notes": "Bivouac possible"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.1, 44.1]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 23,
+        "name": "Auvillar",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0.9, 44.067]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 24,
+        "name": "Lectoure",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0.633, 43.933]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 25,
+        "name": "La Romieu",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0.517, 43.95]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 26,
+        "name": "Condom",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0.367, 43.95]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 27,
+        "name": "Montréal-du-Gers",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0.2, 43.933]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 28,
+        "name": "Eauze",
+        "notes": "Bivouac"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0.1, 43.867]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 29,
+        "name": "Nogaro",
+        "notes": "Gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-0.033, 43.767]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 30,
+        "name": "Saint-Jean-Pied-de-Port",
+        "notes": "Arrivée, gîte"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-1.233, 43.167]
+      }
+    }
+  ]
+}
