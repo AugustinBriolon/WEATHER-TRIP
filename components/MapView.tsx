@@ -32,7 +32,7 @@ export function MapView() {
 
       mapRef.current?.addLayer({
         id: 'hiking-days',
-        type: 'circle',
+        type: 'fill',
         source: 'hiking-days',
       });
     });

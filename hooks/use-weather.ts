@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
-import { searchLocation, getWeatherForecast } from '@/lib/weather-api';
+import { getWeatherForecast, searchLocation } from '@/lib/weather-api';
 import { LocationSearchResult, WeatherData } from '@/types/weather';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 
 export function useLocationSearch(query: string) {

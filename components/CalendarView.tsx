@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
+  DialogContent
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { WeatherCard } from './WeatherCard';
-import { TripForm } from './TripForm';
 import { HikingDay, LocationSearchResult } from '@/types/weather';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
-import { Mountain, Plus, X, MapPin } from 'lucide-react';
+import { X } from 'lucide-react';
+import { useState } from 'react';
+import { TripForm } from './TripForm';
+import { WeatherCard } from './WeatherCard';
 
 interface CalendarViewProps {
   hikingDays: HikingDay[];

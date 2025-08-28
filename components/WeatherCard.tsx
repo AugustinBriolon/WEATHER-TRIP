@@ -1,18 +1,16 @@
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { getWindDirection } from '@/lib/weather-api';
 import { WeatherData } from '@/types/weather';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
 import {
   BarChart3,
-  Calendar,
   Droplets,
   Gauge,
   MapPin,
   Thermometer,
-  Wind,
+  Wind
 } from 'lucide-react';
 import Image from 'next/image';
 

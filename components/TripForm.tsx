@@ -8,8 +8,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
 import { useLocationSearch } from '@/hooks/use-weather';
+import { cn } from '@/lib/utils';
 import { LocationSearchResult } from '@/types/weather';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';

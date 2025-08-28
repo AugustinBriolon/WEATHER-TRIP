@@ -2,8 +2,9 @@ import {
   LocationSearchResult,
   OpenWeatherDaySummaryResponse,
   OpenWeatherGeoResponse,
-  WeatherData
+  WeatherData,
 } from '@/types/weather';
+import { toast } from 'sonner';
 
 const OPENWEATHER_API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 const OPENWEATHER_BASE_URL = 'https://api.openweathermap.org/data/3.0';
@@ -12,6 +13,7 @@ export async function searchLocation(
   query: string
 ): Promise<LocationSearchResult[]> {
   if (!OPENWEATHER_API_KEY) {
+    toast.error('OpenWeather API key not configured');
     throw new Error('OpenWeather API key not configured');
   }
 
@@ -24,6 +26,7 @@ export async function searchLocation(
     if (!response.ok) {
       const errorText = await response.text();
       console.error('API Error response:', errorText);
+      toast.error('Erreur lors de la recherche de localisation');
       throw new Error(
         `Failed to search location: ${response.status} ${response.statusText}`
       );
@@ -39,7 +42,9 @@ export async function searchLocation(
       lon: item.lon,
     }));
   } catch (error) {
-    throw error;
+    console.error('Erreur lors de la recherche de localisation:', error);
+    toast.error('Erreur lors de la recherche de localisation');
+    return [];
   }
 }
 
@@ -49,6 +54,7 @@ export async function getWeatherForecast(
   targetDate: Date
 ): Promise<WeatherData | null> {
   if (!OPENWEATHER_API_KEY) {
+    toast.error('OpenWeather API key not configured');
     return null;
   }
 
@@ -60,6 +66,7 @@ export async function getWeatherForecast(
     );
 
     if (!response.ok) {
+      toast.error('Erreur lors de la récupération des données météo');
       return null;
     }
 
@@ -88,6 +95,8 @@ export async function getWeatherForecast(
       },
     };
   } catch (error) {
+    console.error('Erreur lors de la récupération des données météo:', error);
+    toast.error('Erreur lors de la récupération des données météo');
     return null;
   }
 }
