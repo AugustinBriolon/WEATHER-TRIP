@@ -97,7 +97,7 @@ export function ListView({
         <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4'>
           <div className='text-center'>
             <div className='text-xl sm:text-2xl font-bold text-slate-800'>
-              {hikingDays.length}
+              {hikingDays.length + 1}
             </div>
             <div className='text-xs sm:text-sm text-slate-600'>
               jour{hikingDays.length > 1 ? 's' : ''}
